@@ -1,0 +1,16 @@
+Program 4
+
+public class Main
+{
+    public static int countBinaryString(int n){
+        //base condition
+        if(n==0) return 0;
+        if(n==1) return 2;
+        if(n==2) return 3;
+        return countBinaryString(n - 1) + countBinaryString(n - 2);
+    }
+    public static void main(String[] args){
+        int n = 3 ;
+        System.out.println( countBinaryString(n));
+    }
+}
