@@ -1,4 +1,4 @@
-
+// To find if the path is exists for the the rat
 
 public class Main
 {   private boolean dfs(int[][] m , int x , int y , int n){
@@ -44,6 +44,67 @@ public class Main
         // then i cant reach to the destination
         if (grid[0][0] == 0 || grid[n - 1][n - 1] == 0){
             return false;
+        }
+        return dfs(grid , 0 , 0 , n);
+    }
+	public static void main(String[] args) {
+	    Main main = new Main();
+	    
+		int[][] grid = {
+		    {1,0,0,0},
+		    {1,1,0,0},
+		    {1,1,0,0},
+		    {0,1,1,1}
+		};
+	System.out.println(main.canReachDestination(grid));
+	}
+}
+// To find number of ways exist
+
+public class Main
+{   private int dfs(int[][] m , int x , int y , int n){
+    //if destination reached
+    if( x == n -1 && y == n -1){
+        return 1;
+    }
+    // if the cell is blocked or already visited
+    if (m[x][y] == 0)return 0;
+    
+    // mark the cell as visited
+    m[x][y] = 0 ;
+    
+    //logic
+    int path = 0; 
+    
+    //move up
+    if( x > 0){
+        path = dfs(m , x - 1 , y , n);
+    }
+    //move to the down
+    if( x < n - 1){
+         path += dfs(m , x + 1 , y , n);
+    }
+    //move to the left
+    if( y > 0){
+         path += dfs(m , x , y - 1 , n);
+    }
+    //move to the right
+    if( y < n - 1){
+         path += dfs(m , x ,y + 1 , n);
+    }
+    //backtracking
+    //used for making a cell unmarked or unvisited
+    m[x][y] = 1;
+    
+    return  path;
+}
+    public int canReachDestination(int[][] grid){
+       int n = grid.length;
+        
+        // if starting or ending position is blocked
+        // then i cant reach to the destination
+        if (grid[0][0] == 0 || grid[n - 1][n - 1] == 0){
+            return 0;
         }
         return dfs(grid , 0 , 0 , n);
     }
