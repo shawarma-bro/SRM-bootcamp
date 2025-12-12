@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode headA = list1;
+        ListNode headB = list2;
+        ListNode updated = new ListNode(0);
+        ListNode curr = updated;
+
+
+        while(headA != null && headB != null){
+            if (headA.val < headB.val){
+                curr.next = headA;
+                headA = headA.next;
+            }
+            else{
+                curr.next = headB;
+                headB = headB.next;
+
+            }
+            curr = curr.next;
+           
+        }
+        if(headA != null){
+            curr.next = headA;
+            headA = headA.next;
+        }
+        if(headB != null){
+            curr.next = headB;
+            headB = headB.next;
+        }
+        return updated.next;
+        
+    }
+}
